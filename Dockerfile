@@ -1,5 +1,5 @@
 # Use Java 8 runtime (matches your pom.xml: source/target 1.8)
-FROM openjdk:8-jre-alpine
+FROM eclipse-temurin:8-jre-alpine
 
 # Set working directory inside container
 WORKDIR /app
