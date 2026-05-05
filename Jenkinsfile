@@ -16,8 +16,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                echo "Building Docker image: ${DOCKER_IMAGE}:${IMAGE_TAG}"
-                sh "docker build -t ${DOCKER_IMAGE}:${IMAGE_TAG} ."
+                echo "Building Docker image (amd64): ${DOCKER_IMAGE}:${IMAGE_TAG}"
+                sh '''
+                docker buildx create --use || true
+                docker buildx build \
+                --platform linux/amd64 \
+                -t ${DOCKER_IMAGE}:${IMAGE_TAG} \
+                --load .
+                '''
             }
         }
 
